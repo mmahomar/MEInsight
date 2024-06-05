@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MEInsight.Entities.Core.Organization>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizationTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentOrganizations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Locations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOrganizationUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizationTypes.RefOrganizationTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentOrganizations.OrganizationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Locations.RefLocationId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOrganizationUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OrganizationId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OrganizationId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrganizationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
