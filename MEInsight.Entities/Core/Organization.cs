@@ -61,21 +61,6 @@ namespace MEInsight.Entities.Core
                 
             }
             public List<Language> Languages { get; } = new();
-            public class Language
-            {
-                public Language() { }
-                public Language(string languageCode, string localeCode, string organizationName)
-                {
-                    LanguageCode = languageCode;
-                    LocaleCode = localeCode;
-                    OrganizationName = organizationName;
-                }
-
-                public string LanguageCode { get; set; }
-                public string LocaleCode { get; set; }
-                public string OrganizationName { get; set; }
-            }
-
         }
        
 
