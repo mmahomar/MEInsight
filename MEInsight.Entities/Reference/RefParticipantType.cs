@@ -15,7 +15,7 @@ namespace MEInsight.Entities.Reference
         public RefParticipantType()
         {
             Participants = new HashSet<Participant>();
-            SchoolEnrollments = new HashSet<SchoolEnrollment>();
+            SchoolEnrollments = new HashSet<EducationCenterEnrollment>();
         }
 
         [Key]
@@ -38,7 +38,7 @@ namespace MEInsight.Entities.Reference
         public string ParticipantType { get; set; } = null!;
 
         public virtual ICollection<Participant> Participants { get; set; }
-        public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
+        public virtual ICollection<EducationCenterEnrollment> SchoolEnrollments { get; set; }
 
     }
 }

@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace MEInsight.Entities.Core
 {
-    [Table("SchoolPeriod")]
-    public class SchoolPeriod : BaseEntity
+    [Table("EducationCenterPeriod")]
+    public class EducationCenterPeriod : BaseEntity
     {
-        public SchoolPeriod()
+        public EducationCenterPeriod()
         {
-            SchoolEnrollments = new HashSet<SchoolEnrollment>();
-            SchoolClassrooms = new HashSet<SchoolClassroom>();
+            EducationCenterEnrollments = new HashSet<EducationCenterEnrollment>();
+            EducationCenterClassrooms = new HashSet<EducationCenterClassroom>();
         }
 
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
-        [Display(Name = "School Period")]
+        [Display(Name = "EducationCenter Period")]
         [Column(Order = 0)]
-        public int SchoolPeriodId { get; set; }
+        public int EducationCenterPeriodId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]
@@ -39,8 +39,8 @@ namespace MEInsight.Entities.Core
         [Column(Order = 3)]
         public DateTime? EndDate { get; set; }
 
-        public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
-        public virtual ICollection<SchoolClassroom> SchoolClassrooms { get; set; }
+        public virtual ICollection<EducationCenterEnrollment> EducationCenterEnrollments { get; set; }
+        public virtual ICollection<EducationCenterClassroom> EducationCenterClassrooms { get; set; }
 
     }
 }

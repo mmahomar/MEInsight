@@ -19,22 +19,40 @@ namespace MEInsight.Data
             _httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// Core Entities
+        /// </summary>
+        #region
         public DbSet<Organization> Organizations { get; set; }
-        public DbSet<RefOrganizationType> OrganizationTypes { get; set; }
         public DbSet<Participant> Participants { get; set; }
+
+        #endregion
+
+        /// <summary>
+        /// Ref Entities
+        /// </summary>
+        #region
+        public DbSet<RefOrganizationType> OrganizationTypes { get; set; }
         public DbSet<RefLocation> Locations { get; set; }
+        #endregion
 
 
 
-        //Programs
+        /// <summary>
+        /// Programs
+        /// </summary>
+        #region
         public DbSet<Program> Programs { get; set; } = null!;
         public DbSet<ProgramAssessment> ProgramAssessments { get; set; } = null!;
         public DbSet<Entities.Programs.Group> Groups { get; set; } = null!;
         public DbSet<GroupEnrollment> GroupEnrollments { get; set; } = null!;
         public DbSet<GroupEvaluation> GroupEvaluations { get; set; } = null!;
+        #endregion
 
-
-        //Base Entity
+        /// <summary>
+        /// Base Entity
+        /// </summary>
+        #region
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
@@ -159,6 +177,7 @@ namespace MEInsight.Data
         {
             entry.CurrentValues["IsDeleted"] = true;
         }
+        #endregion
 
     }
 }

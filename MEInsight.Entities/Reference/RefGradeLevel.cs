@@ -15,8 +15,8 @@ namespace MEInsight.Entities.Reference
     {
         public RefGradeLevel()
         {
-            SchoolEnrollments = new HashSet<SchoolEnrollment>();
-            SchoolClassrooms = new HashSet<SchoolClassroom>();
+            SchoolEnrollments = new HashSet<EducationCenterEnrollment>();
+            SchoolClassrooms = new HashSet<EducationCenterClassroom>();
             //TLMMaterials = new HashSet<TLMMaterial>();
             Groups = new HashSet<Group>();
         }
@@ -45,8 +45,8 @@ namespace MEInsight.Entities.Reference
         [Column(Order = 3)]
         public string? GradeLevelId { get; set; }
 
-        public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
-        public virtual ICollection<SchoolClassroom> SchoolClassrooms { get; set; }
+        public virtual ICollection<EducationCenterEnrollment> SchoolEnrollments { get; set; }
+        public virtual ICollection<EducationCenterClassroom> SchoolClassrooms { get; set; }
         //public virtual ICollection<TLMMaterial> TLMMaterials { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
     }

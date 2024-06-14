@@ -11,32 +11,32 @@ using System.Xml.Linq;
 
 namespace MEInsight.Entities.Reference
 {
-    [Table("RefSchoolCluster")]
+    [Table("RefEducationCenterCluster")]
     [Index("RefLocationId", Name = "IX_RefSchoolCluster_RefLocationId")]
-    public class RefSchoolCluster
+    public class RefEducationCenterCluster
     {
-        public RefSchoolCluster()
+        public RefEducationCenterCluster()
         {
-            Schools = new HashSet<School>();
+            EducationCenters = new HashSet<EducationCenter>();
         }
 
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "School Cluster Id")]
+        [Display(Name = "EducationCenter Cluster Id")]
         [Column(Order = 0)]
-        public int RefSchoolClusterId { get; set; }
+        public int RefEducationCenterClusterId { get; set; }
 
         [MaxLength(25)]
-        [Display(Name = "School Cluster Code")]
+        [Display(Name = "EducationCenter Cluster Code")]
         [Column(Order = 1)]
-        public string? SchoolClusterCode { get; set; }
+        public string? Code { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]
-        [Display(Name = "School Cluster")]
+        [Display(Name = "EducationCenter Cluster")]
         [Column(Order = 2)]
-        public string SchoolCluster { get; set; } = null!;
+        public string EducationCenterCluster { get; set; } = null!;
 
         [Display(Name = "Location")]
         [Column(Order = 3)]
@@ -46,6 +46,6 @@ namespace MEInsight.Entities.Reference
         [Display(Name = "Location")]
         public virtual RefLocation? Locations { get; set; }
 
-        public virtual ICollection<School> Schools { get; set; }
+        public virtual ICollection<EducationCenter> EducationCenters { get; set; }
     }
 }

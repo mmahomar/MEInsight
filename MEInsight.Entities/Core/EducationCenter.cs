@@ -11,19 +11,21 @@ using MEInsight.Entities.Reference;
 namespace MEInsight.Entities.Core
 {
     [Table("School")]
-    public class School : Organization
+    public class EducationCenter
     {
-        public School()
+        public EducationCenter()
         {
-            SchoolEnrollments = new HashSet<SchoolEnrollment>();
-            SchoolClassrooms = new HashSet<SchoolClassroom>();
+            SchoolEnrollments = new HashSet<EducationCenterEnrollment>();
+            SchoolClassrooms = new HashSet<EducationCenterClassroom>();
         }
+        [Key]
+        public Guid OrganizationId { get; set; }
 
         [StringLength(100)]
         [Display(Name = "School Code")]
         [Column(Order = 1)]
         [Remote(action: "VerifySchoolCode", controller: "RemoteValidations", HttpMethod = "POST", ErrorMessage = "This Code already exists.", AdditionalFields = "SchoolCodeInitialValue")]
-        public string? SchoolCode { get; set; }
+        public string? Code { get; set; }
 
         [Display(Name = "School Type")]
         [Column(Order = 2)]
@@ -64,31 +66,34 @@ namespace MEInsight.Entities.Core
 
         [ForeignKey("RefSchoolTypeId")]
         [Display(Name = "School Type")]
-        public virtual RefSchoolType? SchoolTypes { get; set; }
+        public virtual RefEducationCenterType? SchoolTypes { get; set; }
 
         [ForeignKey("RefSchoolLocationId")]
         [Display(Name = "School Location")]
-        public virtual RefSchoolLocation? SchoolLocations { get; set; }
+        public virtual RefEducationCenterLocation? SchoolLocations { get; set; }
 
         [ForeignKey("RefSchoolLanguageId")]
         [Display(Name = "School Language")]
-        public virtual RefSchoolLanguage? SchoolLanguages { get; set; }
+        public virtual RefEducationCenterLanguage? SchoolLanguages { get; set; }
 
         [ForeignKey("RefSchoolAdministrationTypeId")]
         [Display(Name = "School Administration Type")]
-        public virtual RefSchoolAdministrationType? SchoolAdministrationTypes { get; set; }
+        public virtual RefEducationCenterAdministrationType? SchoolAdministrationTypes { get; set; }
 
         [ForeignKey("RefSchoolClusterId")]
         [Display(Name = "School Cluster")]
-        public virtual RefSchoolCluster? SchoolClusters { get; set; }
+        public virtual RefEducationCenterCluster? SchoolClusters { get; set; }
 
         [ForeignKey("RefSchoolStatusId")]
         [Display(Name = "Status")]
-        public virtual RefSchoolStatus? SchoolStatus { get; set; }
+        public virtual RefEducationCenterStatus? SchoolStatus { get; set; }
 
-        public virtual ICollection<SchoolEnrollment> SchoolEnrollments { get; set; }
+        [ForeignKey("OrganizationId")]
+        [Display(Name = "Organizations")]
+        public virtual Organization? Organizations { get; set; }
+        public virtual ICollection<EducationCenterEnrollment> SchoolEnrollments { get; set; }
 
-        public virtual ICollection<SchoolClassroom> SchoolClassrooms { get; set; }
+        public virtual ICollection<EducationCenterClassroom> SchoolClassrooms { get; set; }
 
     }
 }

@@ -9,33 +9,33 @@ using System.Threading.Tasks;
 
 namespace MEInsight.Entities.Reference
 {
-    [Table("RefSchoolLanguage")]
-    public class RefSchoolLanguage
+    [Table("RefEducationCenterType")]
+    public class RefEducationCenterType
     {
-        public RefSchoolLanguage()
+        public RefEducationCenterType()
         {
-            Schools = new HashSet<School>();
+            EducationCenters = new HashSet<EducationCenter>();
         }
 
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "School Language Id")]
+        [Display(Name = "EducationCenter Type Id")]
         [Column(Order = 0)]
-        public int RefSchoolLanguageId { get; set; }
+        public int RefEducationCenterTypeId { get; set; }
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(25)]
-        [Display(Name = "School Language Code")]
+        [Display(Name = "EducationCenter Type Code")]
         [Column(Order = 1)]
-        public string SchoolLanguageCode { get; set; } = null!;
+        public string Code { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]
-        [Display(Name = "School Language")]
+        [Display(Name = "EducationCenter Type")]
         [Column(Order = 2)]
-        public string SchoolLanguage { get; set; } = null!;
+        public string EducationCenterType { get; set; } = null!;
 
-        public virtual ICollection<School> Schools { get; set; }
+        public virtual ICollection<EducationCenter> EducationCenters { get; set; }
     }
 }

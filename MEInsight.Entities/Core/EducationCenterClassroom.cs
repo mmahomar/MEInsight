@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace MEInsight.Entities.Core
 {
-    [Table("SchoolClassroom")]
-    public class SchoolClassroom : BaseEntity
+    [Table("EducationCenterClassroom")]
+    public class EducationCenterClassroom : BaseEntity
     {
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "School Classroom")]
+        [Display(Name = "EducationCenter Classroom")]
         [Column(Order = 0)]
-        public Guid SchoolClassroomId { get; set; }
+        public Guid EducationCenterClassroomId { get; set; }
 
         // TODO Add Period
 
@@ -31,9 +31,9 @@ namespace MEInsight.Entities.Core
         [Column(Order = 2)]
         public Guid OrganizationId { get; set; }
 
-        [Display(Name = "School Period")]
+        [Display(Name = "EducationCenter Period")]
         [Column(Order = 3)]
-        public int SchoolPeriodId { get; set; }
+        public int EducationCenterPeriodId { get; set; }
 
         [Display(Name = "Grade Level")]
         [Column(Order = 4)]
@@ -47,13 +47,13 @@ namespace MEInsight.Entities.Core
         [Column(Order = 6)]
         public int? Classes { get; set; }
 
-        [ForeignKey("SchoolPeriodId")]
-        [Display(Name = "School Period")]
-        public virtual SchoolPeriod SchoolPeriods { get; set; } = null!;
+        [ForeignKey("EducationCenterPeriodId")]
+        [Display(Name = "EducationCenter Period")]
+        public virtual EducationCenterPeriod EducationCenterPeriods { get; set; } = null!;
 
         [ForeignKey("OrganizationId")]
         [Display(Name = "School")]
-        public virtual School Schools { get; set; } = null!;
+        public virtual EducationCenter EducationCenters { get; set; } = null!;
 
         [ForeignKey("RefGradeLevelId")]
         [Display(Name = "Grade Level")]
