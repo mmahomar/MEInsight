@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MEInsight.Entities.Programs;
 
 namespace MEInsight.Entities.Core
 {
@@ -18,7 +19,7 @@ namespace MEInsight.Entities.Core
     {
         public Participant()
         {
-            
+            GroupEnrollments = new HashSet<GroupEnrollment>();
         }
         [Key]
         [Required(ErrorMessage = "The {0} field is required.")]
@@ -135,8 +136,8 @@ namespace MEInsight.Entities.Core
         [Display(Name = "Location")]
         public virtual RefLocation? Locations { get; set; }
 
-        //[InverseProperty("Participants")]
-        //public virtual ICollection<GroupEnrollment> GroupEnrollments { get; set; }
+        [InverseProperty("Participants")]
+        public virtual ICollection<GroupEnrollment> GroupEnrollments { get; set; }
 
         [IgnoreDataMember]
         public string? AdditionalData { get; set; }

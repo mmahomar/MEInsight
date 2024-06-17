@@ -28,7 +28,7 @@ namespace MEInsight.Entities.Reference
         [MaxLength(25)]
         [Display(Name = "Disability Type Code")]
         [Column(Order = 1)]
-        public string DisabilityTypeCode { get; set; } = null!;
+        public string Code { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]
@@ -36,6 +36,11 @@ namespace MEInsight.Entities.Reference
         [Column(Order = 2)]
         public string DisabilityType { get; set; } = null!;
 
+        public DisabilityData? Data { get; set; }
+        public class DisabilityData
+        {
+            public List<Language> DisabilityLanguages { get; } = new();
+        }
         public virtual ICollection<Participant> Participants { get; set; }
     }
 }

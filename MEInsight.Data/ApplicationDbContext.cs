@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Text.RegularExpressions;
+using Group = MEInsight.Entities.Programs.Group;
 
 namespace MEInsight.Data
 {
@@ -25,6 +26,10 @@ namespace MEInsight.Data
         #region
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<EducationCenter> EducationCenter { get; set; }
+        public DbSet<EducationCenterClassroom> EducationCenterClassroom { get; set; }
+        public DbSet<EducationCenterEnrollment> EducationCenterEnrollment { get; set; }
+        public DbSet<EducationCenterPeriod> EducationCenterPeriod { get; set; }
 
         #endregion
 
@@ -33,7 +38,20 @@ namespace MEInsight.Data
         /// </summary>
         #region
         public DbSet<RefOrganizationType> OrganizationTypes { get; set; }
-        public DbSet<RefLocation> Locations { get; set; }
+        public DbSet<RefLocation> Locations { get; set; } = null!;
+        public DbSet<RefLocationType> LocationTypes { get; set; } = null!;
+        public DbSet<RefDisabilityType> DisabilityTypes { get; set; } = null!;
+        public DbSet<RefEducationCenterAdministrationType> EducationCenterAdministrationTypes { get; set; } = null!;
+        public DbSet<RefEducationCenterCluster> EducationCenterClusters { get; set; } = null!;
+        public DbSet<RefEducationCenterStatus> EducationCenterStatus { get; set; } = null!;
+        public DbSet<RefEducationCenterLocation> EducationCenterLocations { get; set; } = null!;
+        public DbSet<RefEducationCenterLanguage> EducationCenterLanguages { get; set; } = null!;
+        public DbSet<RefEducationCenterType> EducationCenterTypes { get; set; } = null!;
+        public DbSet<RefGradeLevel> GradeLevels { get; set; } = null!;
+        public DbSet<RefParticipantType> ParticipantTypes { get; set; } = null!;
+        public DbSet<RefParticipantCohort> ParticipantCohorts { get; set; } = null!;
+        public DbSet<RefProgramType> ProgramTypes { get; set; } = null!;
+        public DbSet<RefSex> Sex { get; set; } = null!;
         #endregion
 
 
@@ -47,6 +65,8 @@ namespace MEInsight.Data
         public DbSet<Entities.Programs.Group> Groups { get; set; } = null!;
         public DbSet<GroupEnrollment> GroupEnrollments { get; set; } = null!;
         public DbSet<GroupEvaluation> GroupEvaluations { get; set; } = null!;
+
+
         #endregion
 
         /// <summary>
@@ -64,35 +84,39 @@ namespace MEInsight.Data
                     data.OwnsOne(a => a.Contacts);
                     data.OwnsMany(a => a.Languages);
                 });
+            builder.Entity<RefDisabilityType>().OwnsOne(
+                d => d.Data, data =>
+                {
+                    data.ToJson();
+                    data.OwnsMany(a => a.DisabilityLanguages);
+                });
 
+            //Entities.Core
+            builder.Entity<Organization>().HasQueryFilter(p => !p.IsDeleted);
 
-            //builder.Entity<Organization>(entity =>
-            //{
-            //    entity.OwnsOne(e => e.Data, data =>
-            //    {
-            //        data.ToJson();
-            //        data.OwnsOne(d => d.Contacts, contact =>
-            //        {
-            //            contact.ToJson();
+            builder.Entity<EducationCenterPeriod>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<EducationCenterEnrollment>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<EducationCenterClassroom>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<Participant>().HasQueryFilter(p => !p.IsDeleted);
 
-            //        });
+            //Entities.Programs
+            builder.Entity<MEInsight.Entities.Programs.Program>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<ProgramAssessment>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<Group>().HasQueryFilter(p => !p.IsDeleted);
 
-            //        data.OwnsOne(d => d.Languages, language =>
-            //        {
-            //            language.ToJson();
-            //        });
-            //        data.OwnsOne(d => d.Contacts, contact =>
-            //        {
-            //            contact.ToJson();
+            builder.Entity<GroupEnrollment>(entity =>
+            {
+                entity.HasQueryFilter(p => !p.IsDeleted);
+                entity.HasIndex(t => t.ParticipantId);
 
-            //        });
-            //        data.OwnsMany(d => d.Languages, language =>
-            //        {
-            //            language.ToJson();
-            //        });
-            //    });
-            //});
+                entity.HasOne(d => d.Groups)
+                    .WithMany(p => p.GroupEnrollments)
+                    .HasForeignKey(d => d.GroupId)
+                    .OnDelete(DeleteBehavior.ClientCascade);
+            });
 
+            builder.Entity<GroupEvaluation>().HasQueryFilter(p => !p.IsDeleted);
+            builder.Entity<GroupEvaluation>().HasIndex(t => t.GroupEnrollmentId);
         }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

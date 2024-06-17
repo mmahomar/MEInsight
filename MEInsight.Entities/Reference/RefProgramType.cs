@@ -26,7 +26,7 @@ namespace MEInsight.Entities.Reference
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(25)]
         [Display(Name = "Program Type Code")]
-        public string ProgramTypeCode { get; set; } = null!;
+        public string Code { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]

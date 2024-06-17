@@ -32,7 +32,7 @@ namespace MEInsight.Entities.Reference
         [MaxLength(25)]
         [Display(Name = "Grade Level Code")]
         [Column(Order = 1)]
-        public string GradeLevelCode { get; set; } = null!;
+        public string Code { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]

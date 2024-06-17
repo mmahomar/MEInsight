@@ -28,7 +28,7 @@ namespace MEInsight.Entities.Reference
         [MaxLength(25)]
         [Display(Name = "EducationCenter Language Code")]
         [Column(Order = 1)]
-        public string EducationCenterLanguageCode { get; set; } = null!;
+        public string Code { get; set; } = null!;
 
         [Required(ErrorMessage = "The {0} field is required.")]
         [MaxLength(150)]

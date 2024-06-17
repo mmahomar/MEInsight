@@ -152,7 +152,7 @@ namespace MEInsight.Web.Controllers
                         existingOrganization.Data.Languages.Clear();
                         foreach (var language in organization.Data.Languages)
                         {
-                            existingOrganization.Data.Languages.Add(new Organization.OrganizationData.Language
+                            existingOrganization.Data.Languages.Add(new Language
                             {
                                 LanguageCode = language.LanguageCode,
                                 LocaleCode = language.LocaleCode,
