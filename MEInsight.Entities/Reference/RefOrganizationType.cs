@@ -33,6 +33,12 @@ namespace MEInsight.Entities.Reference
         [MaxLength(25)]
         [Display(Name = "Organization Type Code")]
         public string Code { get; set; } = null!;
+
+        public OrganizationTypeData? RefOrganizationTypeJSON { get; set; }
+        public class OrganizationTypeData
+        {
+            public List<Language> RefOrganizationTypeJSON { get; } = new();
+        }
         public virtual ICollection<Organization> Organizations { get; set; }
         public virtual ICollection<Program> Programs { get; set; }
     }

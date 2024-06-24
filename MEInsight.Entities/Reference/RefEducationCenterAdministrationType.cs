@@ -35,7 +35,6 @@ namespace MEInsight.Entities.Reference
         [Display(Name = "Education Center Administration Type")]
         [Column(Order = 2)]
         public string EducationCenterAdministrationType { get; set; } = null!;
-
         public virtual ICollection<EducationCenter> EducationCenters { get; set; }
     }
 }

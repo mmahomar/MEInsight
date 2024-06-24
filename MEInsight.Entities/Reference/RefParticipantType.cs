@@ -37,6 +37,11 @@ namespace MEInsight.Entities.Reference
         [Column(Order = 2)]
         public string ParticipantType { get; set; } = null!;
 
+        public ParticipantTypeData? RefParticipantTypeJSON { get; set; }
+        public class ParticipantTypeData
+        {
+            public List<Language> RefParticipantTypeJSON { get; } = new();
+        }
         public virtual ICollection<Participant> Participants { get; set; }
         public virtual ICollection<EducationCenterEnrollment> SchoolEnrollments { get; set; }
 

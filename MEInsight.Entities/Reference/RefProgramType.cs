@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MEInsight.Entities.Core;
 
 namespace MEInsight.Entities.Reference
 {
@@ -32,6 +33,12 @@ namespace MEInsight.Entities.Reference
         [MaxLength(150)]
         [Display(Name = "Program Type")]
         public string ProgramType { get; set; } = null!;
+
+        public ProgramTypeData? RefProgramTypeJSON { get; set; }
+        public class ProgramTypeData
+        {
+            public List<Language> RefProgramTypeJSON { get; } = new();
+        }
 
         public virtual ICollection<Program> Programs { get; set; }
     }

@@ -36,6 +36,12 @@ namespace MEInsight.Entities.Reference
         [Column(Order = 2)]
         public string SexId { get; set; } = null!;
 
+        public RefSexData? RefSexJSON { get; set; }
+        public class RefSexData
+        {
+            public List<Language> RefSexJSON { get; } = new();
+        }
+
         public virtual ICollection<Participant> Participants { get; set; }
     }
 }

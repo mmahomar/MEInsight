@@ -96,6 +96,48 @@ namespace MEInsight.Data
                   data.ToJson();
                   data.OwnsMany(a => a.LocationLanguages);
               });
+            builder.Entity<RefGradeLevel>().OwnsOne(
+             d => d.RefGradeLevelJSON, data =>
+             {
+                 data.ToJson();
+                 data.OwnsMany(a => a.RefGradeLevelJSON);
+             });
+            builder.Entity<RefLocationType>().OwnsOne(
+            d => d.RefLocationTypeJSON, data =>
+            {
+                data.ToJson();
+                data.OwnsMany(a => a.RefLocationTypeJSON);
+            });
+            builder.Entity<RefOrganizationType>().OwnsOne(
+            d => d.RefOrganizationTypeJSON, data =>
+            {
+                data.ToJson();
+                data.OwnsMany(a => a.RefOrganizationTypeJSON);
+            });
+            builder.Entity<RefParticipantCohort>().OwnsOne(
+            d => d.RefParticipantCohortJSON, data =>
+            {
+                data.ToJson();
+                data.OwnsMany(a => a.RefParticipantCohortJSON);
+            });
+            builder.Entity<RefParticipantType>().OwnsOne(
+            d => d.RefParticipantTypeJSON, data =>
+            {
+                data.ToJson();
+                data.OwnsMany(a => a.RefParticipantTypeJSON);
+            });
+            builder.Entity<RefProgramType>().OwnsOne(
+            d => d.RefProgramTypeJSON, data =>
+            {
+                data.ToJson();
+                data.OwnsMany(a => a.RefProgramTypeJSON);
+            });
+            builder.Entity<RefSex>().OwnsOne(
+            d => d.RefSexJSON, data =>
+            {
+                data.ToJson();
+                data.OwnsMany(a => a.RefSexJSON);
+            });
             //Entities.Core
             builder.Entity<Organization>().HasQueryFilter(p => !p.IsDeleted);
 

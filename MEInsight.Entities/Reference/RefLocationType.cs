@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MEInsight.Entities.Core;
 
 namespace MEInsight.Entities.Reference
 {
@@ -40,6 +41,11 @@ namespace MEInsight.Entities.Reference
         [Column(Order = 3)]
         public int LocationLevel { get; set; }
 
+        public LocationTypeLanguage? RefLocationTypeJSON { get; set; }
+        public class LocationTypeLanguage
+        {
+            public List<Language> RefLocationTypeJSON { get; } = new();
+        }
         public virtual ICollection<RefLocation> Locations { get; set; }
     }
 }

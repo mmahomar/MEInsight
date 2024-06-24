@@ -44,6 +44,11 @@ namespace MEInsight.Entities.Reference
         [Display(Name = "Grade Id")]
         [Column(Order = 3)]
         public string? GradeLevelId { get; set; }
+        public GradeLevelLanguage? RefGradeLevelJSON { get; set; }
+        public class GradeLevelLanguage
+        {
+            public List<Language> RefGradeLevelJSON { get; } = new();
+        }
 
         public virtual ICollection<EducationCenterEnrollment> SchoolEnrollments { get; set; }
         public virtual ICollection<EducationCenterClassroom> SchoolClassrooms { get; set; }

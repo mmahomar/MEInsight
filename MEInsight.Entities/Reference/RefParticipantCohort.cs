@@ -36,6 +36,12 @@ namespace MEInsight.Entities.Reference
         [Column(Order = 2)]
         public string ParticipantCohort { get; set; } = null!;
 
+        public ParticipantCohortData? RefParticipantCohortJSON { get; set; }
+        public class ParticipantCohortData
+        {
+            public List<Language> RefParticipantCohortJSON { get; } = new();
+        }
+
         public virtual ICollection<Participant> Participants { get; set; }
     }
 }
