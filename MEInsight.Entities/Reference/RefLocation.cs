@@ -41,6 +41,12 @@ namespace MEInsight.Entities.Reference
         [Display(Name = "Parent Location")]
         public virtual RefLocation? ParentLocations { get; set; }
 
+        public LocationData? Data { get; set; }
+        public class LocationData
+        {
+            public List<Language> LocationLanguages { get; } = new();
+        }
+
         //TODO
         // Add LocationReference
 

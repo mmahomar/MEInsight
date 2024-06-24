@@ -90,7 +90,12 @@ namespace MEInsight.Data
                     data.ToJson();
                     data.OwnsMany(a => a.DisabilityLanguages);
                 });
-
+            builder.Entity<RefLocation>().OwnsOne(
+              d => d.Data, data =>
+              {
+                  data.ToJson();
+                  data.OwnsMany(a => a.LocationLanguages);
+              });
             //Entities.Core
             builder.Entity<Organization>().HasQueryFilter(p => !p.IsDeleted);
 

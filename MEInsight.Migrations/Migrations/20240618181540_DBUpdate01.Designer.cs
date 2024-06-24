@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MEInsight.Migrations.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240617180710_DBUpdate01")]
+    [Migration("20240618181540_DBUpdate01")]
     partial class DBUpdate01
     {
         /// <inheritdoc />
@@ -1892,6 +1892,54 @@ namespace MEInsight.Migrations.Migrations
                         .HasForeignKey("RefLocationTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.OwnsOne("MEInsight.Entities.Reference.RefLocation+LocationData", "Data", b1 =>
+                        {
+                            b1.Property<string>("RefLocationId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.HasKey("RefLocationId");
+
+                            b1.ToTable("RefLocation");
+
+                            b1.ToJson("Data");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RefLocationId");
+
+                            b1.OwnsMany("MEInsight.Entities.Core.Language", "LocationLanguages", b2 =>
+                                {
+                                    b2.Property<string>("LocationDataRefLocationId")
+                                        .HasColumnType("nvarchar(450)");
+
+                                    b2.Property<int>("Id")
+                                        .ValueGeneratedOnAdd()
+                                        .HasColumnType("int");
+
+                                    b2.Property<string>("LanguageCode")
+                                        .IsRequired()
+                                        .HasColumnType("nvarchar(max)");
+
+                                    b2.Property<string>("LocaleCode")
+                                        .IsRequired()
+                                        .HasColumnType("nvarchar(max)");
+
+                                    b2.Property<string>("OrganizationName")
+                                        .IsRequired()
+                                        .HasColumnType("nvarchar(max)");
+
+                                    b2.HasKey("LocationDataRefLocationId", "Id");
+
+                                    b2.ToTable("RefLocation");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("LocationDataRefLocationId");
+                                });
+
+                            b1.Navigation("LocationLanguages");
+                        });
+
+                    b.Navigation("Data");
 
                     b.Navigation("LocationTypes");
 

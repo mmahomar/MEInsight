@@ -371,7 +371,8 @@ namespace MEInsight.Migrations.Migrations
                     RefLocationTypeId = table.Column<int>(type: "int", nullable: false),
                     ParentLocationId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Latitude = table.Column<double>(type: "float", nullable: true),
-                    Longitude = table.Column<double>(type: "float", nullable: true)
+                    Longitude = table.Column<double>(type: "float", nullable: true),
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
